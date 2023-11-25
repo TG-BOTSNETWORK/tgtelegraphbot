@@ -1,4 +1,5 @@
-from telegraph import Telegraph, upload_file
+from telegraph import upload_file
+from telegraph.api import Telegraph
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 
