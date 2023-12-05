@@ -9,6 +9,7 @@ BOT_TOKEN = "6162291374:AAEJxgUYtTt0OYDE0G6V2ZhGW-WaLV-qzMQ"
 
 bot = Client("telegraph_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 telegraph = Telegraph()
+telegraph.create_account(short_name='1337')
 
 @bot.on_message(filters.private)
 async def upload_to_telegraph(client: Client, message: Message):
@@ -18,7 +19,7 @@ async def upload_to_telegraph(client: Client, message: Message):
             file_url = upload_file(file_path)
         elif message.photo:
             file_path = await message.download()
-            file_url = upload_file(file_path)
+            file_url = telegraph.upload_file(file_path)
         else:
             return await message.reply_text("Unsupported file type. Please send a document or a photo.")
 
