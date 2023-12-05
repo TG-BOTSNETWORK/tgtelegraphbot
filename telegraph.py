@@ -1,12 +1,11 @@
-from telegraph.aio import upload_file
-from telegraph.api import Telegraph
+from telegraph import Telegraph, upload_file
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 
 # Set your API_ID, API_HASH, and BOT_TOKEN here
 API_ID = "14688437"
 API_HASH = "5310285db722d1dceb128b88772d53a6"
-BOT_TOKEN = "6667196156:AAFaRtjhyvOHZyvN1XKTStvgz-DJJWDm85Q"
+BOT_TOKEN = "6162291374:AAEJxgUYtTt0OYDE0G6V2ZhGW-WaLV-qzMQ"
 
 bot = Client("telegraph_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 telegraph = Telegraph()
