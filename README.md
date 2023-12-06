@@ -23,6 +23,13 @@ Telegraph Telegram Bot is a bot that allows you to create Telegraph pages for yo
 4. Obtain API credentials from [Telegraph API](https://telegra.ph/api) and update the `token` variable in your script.
 5. Run the bot: `telegraph.py`
 
+## Deployment
+
+You can deploy this bot to Heroku using the following button:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/TG-BOTSNETWORK/tgtelegraphbot)
+
+
 ## Usage
 
 - Send a photo, video, GIF, or text to the bot to create a Telegraph page.
