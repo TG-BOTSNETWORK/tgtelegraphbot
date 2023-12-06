@@ -12,7 +12,7 @@ BOT_TOKEN = "6162291374:AAEJxgUYtTt0OYDE0G6V2ZhGW-WaLV-qzMQ"
 app = Client("telegraph_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 tgraph = TgGraph(access_token=token)
 
-@app.on_message(& filters.photo & filters.command("telegraph", prefixes="/") & filters.private)
+@app.on_message(filters.photo & filters.command("telegraph", prefixes="/") & filters.private)
 async def telegraph_link(client, message):
     try:
         # Check if the message contains any media (photo, video, document)
