@@ -7,7 +7,7 @@ API_ID = "14688437"
 API_HASH = "5310285db722d1dceb128b88772d53a6"
 BOT_TOKEN = "6162291374:AAEJxgUYtTt0OYDE0G6V2ZhGW-WaLV-qzMQ"
 
-bot = Client("telegraph_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
+app = Client("telegraph_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 tgraph = TgGraph()
 
 @app.on_message(filters.command("telegraph", prefixes="/") & filters.private)
