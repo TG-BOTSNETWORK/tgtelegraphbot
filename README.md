@@ -19,9 +19,8 @@ Telegraph Telegram Bot is a bot that allows you to create Telegraph pages for yo
 
 1. Clone the repository.
 2. Install the required dependencies: `pip install -r requirements.txt`
-3. Set up your PostgreSQL database and update the `Config.py` file with your database details.
-4. Obtain API credentials from [Telegraph API](https://telegra.ph/api) and update the `token` variable in your script.
-5. Run the bot: `telegraph.py`
+3. Obtain API credentials from [Telegraph API](https://telegra.ph/api) and update the `token` variable in your script.
+4. Run the bot: `telegraph.py`
 
 ## Deployment
 
