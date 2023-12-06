@@ -1,44 +1,47 @@
-from telegraph import Telegraph, upload_file
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
+from bcnadds import TgGraph
+import io
 
-# Set your API_ID, API_HASH, and BOT_TOKEN here
 API_ID = "14688437"
 API_HASH = "5310285db722d1dceb128b88772d53a6"
 BOT_TOKEN = "6162291374:AAEJxgUYtTt0OYDE0G6V2ZhGW-WaLV-qzMQ"
 
 bot = Client("telegraph_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
-telegraph = Telegraph()
-telegraph.create_account(short_name='1337')
+tgraph = TgGraph()
 
-@bot.on_message(filters.private)
-async def upload_to_telegraph(client: Client, message: Message):
+@app.on_message(filters.command("telegraph", prefixes="/") & filters.private)
+async def telegraph_link(client, message):
     try:
-        if message.document:
+        # Check if the message contains any media (photo, video, document)
+        if message.media:
+            # Download the media file
             file_path = await message.download()
-            file_url = upload_file(file_path)
-        elif message.photo:
-            file_path = await message.download()
-            file_url = telegraph.upload_file(file_path)
+            
+            # Upload the media file to Telegraph
+            uploaded_files = await tgraph.file_upload(file_path)
+            
+            # Get the source URL of the uploaded media
+            media_source_url = uploaded_files[0].get('src')
+            
+            # Send the Telegraph link to the user
+            await message.reply(f"Telegraph link for the media: {media_source_url}")
+        elif message.text:
+            # If the message contains text, create a Telegraph page with the text
+            page_title = "Telegraph Page"
+            page_content = message.text
+            
+            # Create a new Telegraph page
+            response = await tgraph.create_page(page_title, html_content=page_content, return_content=True, return_html=True)
+            
+            # Get the Telegraph link from the response
+            telegraph_link = response.get('url')
+            
+            # Send the Telegraph link to the user
+            await message.reply(f"Telegraph link for the text: {telegraph_link}")
         else:
-            return await message.reply_text("Unsupported file type. Please send a document or a photo.")
-
-        # Generate a Telegraph link
-        response = telegraph.create_page(
-            title="Uploaded File",
-            content=[{"tag": "p", "children": [file_url]}]
-        )
-
-        telegraph_link = response["url"]
-
-        # Send the Telegraph link to the user
-        buttons = [[InlineKeyboardButton("Open Telegraph Link", url=telegraph_link)]]
-        reply_markup = InlineKeyboardMarkup(buttons)
-        await message.reply_text(f"File uploaded to Telegraph. Here is the link: {telegraph_link}", reply_markup=reply_markup)
-
+            await message.reply("Unsupported message type. Please send text or media.")
     except Exception as e:
-        print(e)
-        await message.reply_text("Something went wrong. Please try again.")
+        await message.reply(f"An error occurred: {str(e)}")
 
-# Run the bot
-bot.run()
+app.run()
