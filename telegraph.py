@@ -118,6 +118,26 @@ async def handle_text_messages(client, message):
     except Exception as e:
         await message.reply(f"An error occurred: {str(e)}")
 
+@app.on_callback_query(filters.regex("about"))
+async def about_callback(client, callback_query):
+    about_text = (
+        f"🤖 **Bot Information**\n\n"
+        f"**Developer:** [Developer](t.me/my_name_is_nobitha)\n"
+        f"**Library:** [Pyrogram](pyrogram.org)\n"
+        f"**Programming Language:** [python](python.org)\n"
+        f"**Telegraph API:** [Bcnadds](https://github.com/bcncalling/bcnadds)\n"
+    )
+    keyboard = InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton("Back", callback_data="start"),
+            ]
+        ]
+    )
+    await callback_query.edit_message_text(
+        about_text,
+        reply_markup=keyboard
+    )
 
 @app.on_callback_query(filters.regex("help"))
 async def help_callback(client, callback_query):
@@ -158,8 +178,10 @@ async def start_callback(client, callback_query):
     keyboard = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("Support", url="t.me/TgBotsNetwork"),
-                InlineKeyboardButton("Updates", url="t.me/TgBotsNetwork")
+                InlineKeyboardButton("Updates", url="t.me/TgBotsNetwork"),
+            ],
+            [
+                InlineKeyboardButton("About", callback_data="about")
             ],
             [
                 InlineKeyboardButton("Help", callback_data="help"),
@@ -178,8 +200,10 @@ async def start(client, message):
     keyboard = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("Support", url="t.me/TgBotsNetwork"),
-                InlineKeyboardButton("Updates", url="t.me/TgBotsNetwork")
+                InlineKeyboardButton("Updates", url="t.me/TgBotsNetwork"),
+            ],
+            [
+                InlineKeyboardButton("About", callback_data="about")
             ],
             [
                 InlineKeyboardButton("Help", callback_data="help"),
