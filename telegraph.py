@@ -136,7 +136,8 @@ async def about_callback(client, callback_query):
     )
     await callback_query.edit_message_text(
         about_text,
-        reply_markup=keyboard
+        reply_markup=keyboard,
+        disable_web_page_preview=True
     )
 
 @app.on_callback_query(filters.regex("help"))
