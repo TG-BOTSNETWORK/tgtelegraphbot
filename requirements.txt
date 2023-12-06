@@ -2,4 +2,4 @@ pyrogram==2.0.106
 TgCrypto
 asyncio
 telegraph==2.2.0
-bcnadds==0.0.26
+bcnadds==0.0.27
